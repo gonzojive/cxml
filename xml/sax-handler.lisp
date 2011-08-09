@@ -291,10 +291,11 @@ Setting this variable has no effect unless both
 		  (declare (ignore ,@args))
 		  nil)
 		(:method ((handler t) ,@args)
-		  (declare (ignore ,@args))
-		  (warn "deprecated SAX default method used by a handler ~
+                  (declare (optimize (debug 3)))
+                  #+nil (declare (ignore ,@args))
+		  (warn "deprecated SAX default method ~S used by a handler ~
                          that is not a subclass of SAX:ABSTRACT-HANDLER ~
-                         or HAX:ABSTRACT-HANDLER")
+                         or HAX:ABSTRACT-HANDLER: ~S" ',name (class-of handler))
 		  nil)
 		(:method ((handler abstract-handler) ,@args)
 		  (declare (ignore ,@args))
